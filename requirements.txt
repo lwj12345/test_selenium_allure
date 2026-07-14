@@ -4,6 +4,7 @@ pytest-xdist
 pytest-order
 pytest-rerunfailures
 pytest-base_url
+pytest-timeout
 allure-pytest
 pymysql
 pyyaml

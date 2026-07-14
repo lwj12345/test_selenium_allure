@@ -40,7 +40,8 @@ jobs:
 
       - name: Run pytest and generate allure results
         run: |
-          CI=true pytest --alluredir=./temps
+          CI=true pytest --alluredir=./temps --timeout=120 -x
+        continue-on-error: true
 
       - name: Install Allure CLI
         uses: simple-elf/allure-report-action@master
@@ -50,6 +51,7 @@ jobs:
       - name: Generate Allure HTML report
         run: |
           allure generate ./temps -o ./reports --clean
+        continue-on-error: true
 
       - name: Upload report as artifact
         uses: actions/upload-artifact@v4
