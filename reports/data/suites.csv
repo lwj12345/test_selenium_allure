@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","3350","测试用户个人信息查看与修改个人信息成功","tests","2026-07-14","passed","2026-07-14","","test_user_function_package","",""
+"","10251","测试用户使用合法地址在商城下单","tests","2026-07-14","passed","2026-07-14","","test_user_function_package","",""
+"","7175","测试用户密码修改保存并测试成功","tests","2026-07-14","passed","2026-07-14","","test_user_function_package","",""
+"","4479","测试用户使用已注册的正确的用户名和密码登录","tests","2026-07-14","passed","2026-07-14","","test_user_function_package","",""
+"","3037","测试用户使用购物车下单","tests","2026-07-14","passed","2026-07-14","","test_user_function_package","",""
+"","21299","测试用户使用正确的用户名和密码注册登录","tests","2026-07-14","passed","2026-07-14","","test_user_function_package","",""
