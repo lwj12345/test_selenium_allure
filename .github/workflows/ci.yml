@@ -1,0 +1,70 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Chrome and ChromeDriver
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+
+      - name: Run pytest and generate allure results
+        run: |
+          CI=true pytest --alluredir=./temps
+
+      - name: Install Allure CLI
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure-version: '2.28.0'
+
+      - name: Generate Allure HTML report
+        run: |
+          allure generate ./temps -o ./reports --clean
+
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: ./reports
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./reports
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
